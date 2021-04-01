@@ -26,7 +26,8 @@ class CustomerSystem{
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code
                 String firstName = "";
-                enterCustomerInfo(firstName);
+                String lastName = "w w";
+                enterCustomerInfo(firstName, lastName);
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
@@ -56,11 +57,11 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void enterCustomerInfo(String fName) {
+    public static void enterCustomerInfo(String fName, String lName) {
         Scanner reader = new Scanner(System.in);
         System.out.println("What is your first name?");
         fName = reader.nextLine();
-        System.out.println(fName);
+        System.out.println(fName + lName);
 
         reader.close();
     }
