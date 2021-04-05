@@ -26,6 +26,7 @@ class CustomerSystem{
         String postalCode = "";
         long creditCardNumber = 0;
         String postThis = "";
+        int iD = 11; // change later to a random??
 
         do{
             printMenu();                                    // Printing out the main menu
@@ -35,7 +36,7 @@ class CustomerSystem{
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code
                 
-                postThis += enterCustomerInfo(firstName, lastName, city, postalCode, creditCardNumber);
+                postThis += customerID(iD) + enterCustomerInfo(firstName, lastName, city, postalCode, creditCardNumber);
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
@@ -143,6 +144,19 @@ class CustomerSystem{
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
     *******************************************************************/
 
+    /*
+    * This method may be edited to achieve the task however you like.
+    * The method may not nesessarily be a void return type
+    * This method may also be broken down further depending on your algorithm
+    */
+    public static String customerID(int identification) {
+        Random rand = new Random();
+        int randNum2 = rand.nextInt(100);
+        int randNum1 = rand.nextInt(100)*identification; 
+
+        return Integer.toString(randNum1 + randNum2) + ". ";
+        
+    }
     /*
     * This method may be edited to achieve the task however you like.
     * The method may not nesessarily be a void return type
