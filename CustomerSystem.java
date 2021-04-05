@@ -25,6 +25,7 @@ class CustomerSystem{
         String city = "";
         String postalCode = "";
         long creditCardNumber = 0;
+        String postThis = "";
 
         do{
             printMenu();                                    // Printing out the main menu
@@ -34,7 +35,7 @@ class CustomerSystem{
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code
                 
-                enterCustomerInfo(firstName, lastName, city, postalCode, creditCardNumber);
+                postThis += enterCustomerInfo(firstName, lastName, city, postalCode, creditCardNumber);
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
@@ -82,6 +83,21 @@ class CustomerSystem{
 
         String ccNumtoString = Long.toString(creditCardNum);
 
+        while (ccNumtoString.length() < 9) {
+            System.out.println("You must enter more than 9 digits for your credit card");
+            creditCardNum = reader.nextInt();
+            ccNumtoString = Long.toString(creditCardNum);
+        }
+
+        String reversedNums = reverseDigits(ccNumtoString);
+        String oddNum = identifyOdd(reversedNums);
+        String evenIndex = identifyEven(reversedNums);
+        String evenNum = doubleEvenNum(evenIndex);
+
+        int sum1 = sumOfOdd(oddNum);
+        int sum2 = sumOfEven(evenNum);
+
+
         String customerInfo = fName + comma + lName + comma + place + comma + postCode + comma + ccNumtoString + "\n";
 
         reader.close();
@@ -111,4 +127,57 @@ class CustomerSystem{
     /*******************************************************************
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
     *******************************************************************/
+
+    /*
+    * This method may be edited to achieve the task however you like.
+    * The method may not nesessarily be a void return type
+    * This method may also be broken down further depending on your algorithm
+    */
+    public static int sumOfOdd(String sumOdd) {
+        
+    }
+    /*
+    * This method may be edited to achieve the task however you like.
+    * The method may not nesessarily be a void return type
+    * This method may also be broken down further depending on your algorithm
+    */
+    public static int sumOfEven(String sumEven) {
+        
+    }
+    /*
+    * This method may be edited to achieve the task however you like.
+    * The method may not nesessarily be a void return type
+    * This method may also be broken down further depending on your algorithm
+    */
+    public static String reverseDigits(String ccNumtoString) {
+        
+        
+    }
+    /*
+    * This method may be edited to achieve the task however you like.
+    * The method may not nesessarily be a void return type
+    * This method may also be broken down further depending on your algorithm
+    */
+    public static String identifyOdd(String reversed) {
+        
+        
+    }
+    /*
+    * This method may be edited to achieve the task however you like.
+    * The method may not nesessarily be a void return type
+    * This method may also be broken down further depending on your algorithm
+    */
+    public static String identifyEven(String reversed) {
+        
+        
+    }
+    /*
+    * This method may be edited to achieve the task however you like.
+    * The method may not nesessarily be a void return type
+    * This method may also be broken down further depending on your algorithm
+    */
+    public static String doubleEvenNum(String evenNumbers) {
+        
+        
+    }
 }
