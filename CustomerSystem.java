@@ -39,7 +39,13 @@ class CustomerSystem{
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
-                generateCustomerDataFile();
+                try {
+                    // replace postThis with the enterCustomerInfo(firstName, lastName, city, postalCode, creditCardNumber) method
+                    generateCustomerDataFile(postThis);
+                }
+                catch (Exception e) {
+                    System.out.println("An error has occured");
+                }
             }
             else{
                 System.out.println("Please type in a valid option (A number from 1-9)");
@@ -122,7 +128,16 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void generateCustomerDataFile(){
+    public static void generateCustomerDataFile(String csvLine) throws FileNotFoundException {
+        System.out.println("\nThis is printed: " + csvLine + "\n");
+
+        File outFile = new File("customerInfo.csv");
+        PrintWriter out = new PrintWriter(outFile);
+        out.write(csvLine);
+    
+        System.out.println("Done");
+
+        out.close(); // closing print writer
     }
     /*******************************************************************
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
