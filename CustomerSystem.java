@@ -107,6 +107,21 @@ class CustomerSystem{
 
         String customerInfo = fName + comma + lName + comma + place + comma + postCode + comma + ccNumtoString + "\n";
 
+        // validation happens here
+        if (validatePostalCode(postCode) > 0 && validateCreditCard( sum1, sum2 ) == true) {
+
+            return customerInfo;
+        }
+        else if (validateCreditCard( sum1, sum2 ) == false) {
+            System.out.println("The credit card number is invalid\n\n");
+            return "";
+            // re input????????
+        }
+        else {
+            System.out.println("The postal code is invalid\n\n");
+            return "";
+        }
+
         reader.close();
         return customerInfo;
     }
@@ -122,7 +137,15 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void validateCreditCard(){
+    public static boolean validateCreditCard(int sum1, int sum2){
+        int sum = sum1 + sum2;
+
+        if (sum % 10 == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     /*
     * This method may be edited to achieve the task however you like.
