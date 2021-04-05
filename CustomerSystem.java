@@ -5,6 +5,10 @@
 
 import java.util.Scanner;
 // More packages may be imported in the space below
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Random; 
 
 class CustomerSystem{
     public static void main(String[] args){
