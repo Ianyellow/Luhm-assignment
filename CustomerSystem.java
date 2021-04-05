@@ -97,7 +97,7 @@ class CustomerSystem{
         }
 
         String reversedNums = reverseDigits(ccNumtoString);
-        
+
         String oddNum = identifyOdd(reversedNums);
         String evenIndex = identifyEven(reversedNums);
 
@@ -243,7 +243,15 @@ class CustomerSystem{
     * This method may also be broken down further depending on your algorithm
     */
     public static String doubleEvenNum(String evenNumbers) {
-        
+        String combine = "";
+        for (int i = 0; i < evenNumbers.length(); i++ ) {
+            //evenNumbers.charAt(i)
+            String word = Character.toString(evenNumbers.charAt(i));
+            int j = 2*Integer.parseInt(word);
+            combine += j;
+        }
+
+        return combine;
         
     }
 }
