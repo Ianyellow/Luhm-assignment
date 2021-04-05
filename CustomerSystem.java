@@ -97,8 +97,10 @@ class CustomerSystem{
         }
 
         String reversedNums = reverseDigits(ccNumtoString);
+        
         String oddNum = identifyOdd(reversedNums);
         String evenIndex = identifyEven(reversedNums);
+
         String evenNum = doubleEvenNum(evenIndex);
 
         int sum1 = sumOfOdd(oddNum);
@@ -211,7 +213,13 @@ class CustomerSystem{
     * This method may also be broken down further depending on your algorithm
     */
     public static String identifyOdd(String reversed) {
-        
+        String oddNumbers = "";
+        for (int i = 0; i < reversed.length(); i++) {
+            String word = Character.toString(reversed.charAt(i));
+            oddNumbers += word;
+            i++;
+        }
+        return oddNumbers;
         
     }
     /*
@@ -220,7 +228,13 @@ class CustomerSystem{
     * This method may also be broken down further depending on your algorithm
     */
     public static String identifyEven(String reversed) {
-        
+        String evenNumbers = "";
+        for (int i = 1; i < reversed.length(); i++) {
+            String word = Character.toString(reversed.charAt(i));
+            evenNumbers += word;
+            i++;
+        }
+        return evenNumbers;
         
     }
     /*
