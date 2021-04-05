@@ -20,7 +20,11 @@ class CustomerSystem{
         exitCondition = "9";
 
         // More variables for the main may be declared in the space below
-
+        String firstName = "";
+        String lastName = "";
+        String city = "";
+        String postalCode = "";
+        long creditCardNumber = 0;
 
         do{
             printMenu();                                    // Printing out the main menu
@@ -29,11 +33,7 @@ class CustomerSystem{
             if (userInput.equals(enterCustomerOption)){
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code
-                String firstName = "";
-                String lastName = "w w";
-                String city = "";
-                int postalCode = 0;
-                int creditCardNumber = 0;
+                
                 enterCustomerInfo(firstName, lastName, city, postalCode, creditCardNumber);
             }
             else if (userInput.equals(generateCustomerOption)) {
@@ -64,8 +64,10 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void enterCustomerInfo(String fName, String lName, String place, int postCode, int creditCardNum) {
+    public static String enterCustomerInfo(String fName, String lName, String place, String postCode, long creditCardNum) {
         Scanner reader = new Scanner(System.in);
+        String comma = ", ";
+
         System.out.println("What is your first name?");
         fName = reader.nextLine();
         System.out.println("\nWhat is your last name?");
@@ -73,12 +75,17 @@ class CustomerSystem{
         System.out.println("\nWhat city do you live in?");
         place = reader.nextLine();
         System.out.println("\nWhat is the postal code?");
-        postCode = reader.nextInt();
+        postCode = reader.nextLine();
         System.out.println("\nWhat is your credit card number?");
-        creditCardNum = reader.nextInt();
-        System.out.println(fName + lName);
+        creditCardNum = reader.nextLong();
+
+
+        String ccNumtoString = Long.toString(creditCardNum);
+
+        String customerInfo = fName + comma + lName + comma + place + comma + postCode + comma + ccNumtoString + "\n";
 
         reader.close();
+        return customerInfo;
     }
     /*
     * This method may be edited to achieve the task however you like.
