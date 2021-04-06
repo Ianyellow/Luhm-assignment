@@ -84,15 +84,14 @@ class CustomerSystem{
             postCode = reader.nextLine();
         } while (postCode.length() < 3);
         
-        String ccNumtoString;
+        String creditCardNum;
         do {
             System.out.println("\nWhat is your credit card number? (Please enter at least 9 numbers)");
-            long creditCardNum = reader.nextLong();
-            ccNumtoString = Long.toString(creditCardNum);
-        } while (ccNumtoString.length() < 9);
+            creditCardNum = reader.nextLine();     // even though it's suppose to be a number, still accept it as a string
+        } while (creditCardNum.length() < 9);
 
 
-        String reversedNums = reverseDigits(ccNumtoString);
+        String reversedNums = reverseDigits(creditCardNum);
 
         String oddNum = identifyOdd(reversedNums);
         String evenIndex = identifyEven(reversedNums);
@@ -103,7 +102,7 @@ class CustomerSystem{
         int sum2 = sumOfEven(evenNum);
 
 
-        String customerInfo = fName + comma + lName + comma + place + comma + postCode + comma + ccNumtoString + "\n";
+        String customerInfo = fName + comma + lName + comma + place + comma + postCode + comma + creditCardNum + "\n";
 
 
         // validation happens here
