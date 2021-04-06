@@ -20,13 +20,8 @@ class CustomerSystem{
         exitCondition = "9";
 
         // More variables for the main may be declared in the space below
-        String firstName = "";
-        String lastName = "";
-        String city = "";
-        String postalCode = "";
-        long creditCardNumber = 0;
         String postThis = "";
-        int iD = 11; // change later to a random??
+        int id = 11;
 
         do{
             printMenu();                                    // Printing out the main menu
@@ -36,12 +31,11 @@ class CustomerSystem{
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code
                 
-                postThis += customerID(iD) + enterCustomerInfo(firstName, lastName, city, postalCode, creditCardNumber);
+                postThis += enterCustomerInfo(id);
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
                 try {
-                    // replace postThis with the enterCustomerInfo(firstName, lastName, city, postalCode, creditCardNumber) method
                     generateCustomerDataFile(postThis);
                 }
                 catch (Exception e) {
@@ -72,29 +66,31 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static String enterCustomerInfo(String fName, String lName, String place, String postCode, long creditCardNum) {
+    public static String enterCustomerInfo(int idNum) {
         Scanner reader = new Scanner(System.in);
-        String comma = ", ";
+        String comma = ", ";        // A string representing a comma
 
+        // prompt user inputs
         System.out.println("What is your first name?");
-        fName = reader.nextLine();
+        String fName = reader.nextLine();
         System.out.println("\nWhat is your last name?");
-        lName = reader.nextLine();
+        String lName = reader.nextLine();
         System.out.println("\nWhat city do you live in?");
-        place = reader.nextLine();
-        System.out.println("\nWhat is the postal code?");
-        postCode = reader.nextLine();
-        System.out.println("\nWhat is your credit card number?");
-        creditCardNum = reader.nextLong();
+        String place = reader.nextLine();
 
-
-        String ccNumtoString = Long.toString(creditCardNum);
-
-        while (ccNumtoString.length() < 9) {
-            System.out.println("You must enter more than 9 digits for your credit card");
-            creditCardNum = reader.nextInt();
+        String postCode;
+        do {
+            System.out.println("\nWhat is the postal code? (Please enter at least 3 characters)");
+            postCode = reader.nextLine();
+        } while (postCode.length() < 3);
+        
+        String ccNumtoString;
+        do {
+            System.out.println("\nWhat is your credit card number? (Please enter at least 9 numbers)");
+            long creditCardNum = reader.nextLong();
             ccNumtoString = Long.toString(creditCardNum);
-        }
+        } while (ccNumtoString.length() < 9);
+
 
         String reversedNums = reverseDigits(ccNumtoString);
 
@@ -109,10 +105,11 @@ class CustomerSystem{
 
         String customerInfo = fName + comma + lName + comma + place + comma + postCode + comma + ccNumtoString + "\n";
 
+
         // validation happens here
         if (validatePostalCode(postCode) > 0 && validateCreditCard( sum1, sum2 ) == true) {
-
-            return customerInfo;
+            System.out.println("\n\n");     // print empty lines
+            return customerID(idNum) + customerInfo;
         }
         else if (validateCreditCard( sum1, sum2 ) == false) {
             System.out.println("The credit card number is invalid\n\n");
@@ -125,7 +122,7 @@ class CustomerSystem{
         }
 
         reader.close();
-        return customerInfo;
+
     }
     /*
     * This method may be edited to achieve the task however you like.
@@ -155,15 +152,21 @@ class CustomerSystem{
     * This method may also be broken down further depending on your algorithm
     */
     public static void generateCustomerDataFile(String csvLine) throws FileNotFoundException {
-        System.out.println("\nThis is printed: " + csvLine + "\n");
+        if (csvLine.equals("")) {
+            System.out.println("\nThere are no users, can't generate file\n");
+        }
+        else {
+            System.out.println("\nThis is printed: " + csvLine + "\n");
 
-        File outFile = new File("customerInfo.csv");
-        PrintWriter out = new PrintWriter(outFile);
-        out.write(csvLine);
+            File outFile = new File("customerInfo.csv");
+            PrintWriter out = new PrintWriter(outFile);
+            out.write(csvLine);
     
-        System.out.println("Done");
+            System.out.println("Done");
 
-        out.close(); // closing print writer
+            out.close(); // closing print writer
+        }
+        
     }
     /*******************************************************************
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
@@ -245,7 +248,7 @@ class CustomerSystem{
     public static String doubleEvenNum(String evenNumbers) {
         String combine = "";
         for (int i = 0; i < evenNumbers.length(); i++ ) {
-            //evenNumbers.charAt(i)
+
             String word = Character.toString(evenNumbers.charAt(i));
             int j = 2*Integer.parseInt(word);
             combine += j;
