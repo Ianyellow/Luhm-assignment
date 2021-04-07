@@ -98,8 +98,10 @@ class CustomerSystem{
             creditCardNum = reader.nextLine();     // even though it's suppose to be a number, still accept it as a string
         } while (creditCardNum.length() < 9);
 
+        // call eliminateSpaces method
+        String unSpaced = eliminateSpaces(creditCardNum);   // store the string that's returned
         // call reverseDigits method
-        String reversedNums = reverseDigits(creditCardNum);     // store the string that's returned
+        String reversedNums = reverseDigits(unSpaced);     // store the string that's returned
 
         // call identifyOdd method 
         String oddNum = identifyOdd(reversedNums);      // store the string that's returned
@@ -300,5 +302,23 @@ class CustomerSystem{
 
         return combine;     // all the doubled digits
         
+    }
+    /*
+    * Description: eliminates the spaces the user inputs in their credit card #
+    *
+    * @author   Ian
+    * @param    ccNum - string of digits from the credit card #
+    * @return   j - string of all the values of the unspaced credit card #
+    */
+    public static String eliminateSpaces(String ccNum) {
+        String j = "";      // a string accumulator
+        for (int i = 0; i < ccNum.length(); i++) {
+            String x = Character.toString(ccNum.charAt(i));     // convert the digits from char to string
+            if (x.equals(" ")) {
+                x = "";             // remove the empty spaces
+            }
+            j += x;     // combine each digit into a string
+        }
+        return j;   // the credit card number without spaces
     }
 }
