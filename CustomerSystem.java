@@ -6,8 +6,10 @@
 import java.util.Scanner;
 // More packages may be imported in the space below
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 class CustomerSystem{
     public static void main(String[] args){
@@ -175,22 +177,33 @@ class CustomerSystem{
     * @author   Ian
     * @param    csvLine - string containing the customer's ID and all their information
     */
-    public static void generateCustomerDataFile(String csvLine) throws FileNotFoundException {
+    public static void generateCustomerDataFile(String csvLine) throws IOException {
         // condition: if there are no customers checked in/ registered
         if (csvLine.equals("")) {
             System.out.println("\nThere are no users, can't generate file\n");
         }
         // if there are valid customers
         else {
-            System.out.println("\nThis is printed: " + csvLine + "\n");
-
             File outFile = new File("customerInfo.csv");    // creating a csv file
-            PrintWriter out = new PrintWriter(outFile);     // let printwriter access the file
-            out.write(csvLine);         // editing the file
-    
-            System.out.println("Done");
 
-            out.close(); // closing print writer
+            String skip = "";
+            // skips a line if the file already exists
+            if (outFile.exists()) {
+                skip = "\n";
+            }
+
+            FileWriter fr = new FileWriter(outFile, true);  // boolean to append
+            BufferedWriter br = new BufferedWriter(fr);     // initialize buffer writer
+            PrintWriter out = new PrintWriter(br);      // let printwriter access the file
+
+            out.write(skip + csvLine);      // editing the file
+
+            // provides the location and name of the file
+            System.out.println("File located at: " + outFile.getAbsolutePath() + "\nName: customerInfo");
+            System.out.println("\nDone\n");
+            out.close();    // closing print writer
+            br.close();     // closing buffer writer
+            fr.close();     // closing file writer
         }
         
     }
@@ -208,7 +221,7 @@ class CustomerSystem{
     */
     public static String customerID(String identification) {
 
-        return identification.substring(0, 3) + ". ";   // the string of the ID number
+        return identification.substring(0, 4) + ". ";   // the string of the ID number
         
     }
     /*
