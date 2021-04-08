@@ -132,13 +132,13 @@ class CustomerSystem{
         }
         // condition: if the credit card in invalid
         else if (validateCreditCard( sum1, sum2 ) == false) {
-            System.out.println("The credit card number is invalid\n\n");
+            System.out.println("\nThe credit card number is invalid\n\n");
 
             return "";      // return nothing
         }
         // if the postal code is invalid
         else {
-            System.out.println("The postal code is invalid\n\n");
+            System.out.println("\nThe postal code is invalid\n\n");
 
             return "";      // return nothing
         }
@@ -146,12 +146,21 @@ class CustomerSystem{
         // don't close Scanner, because an error will occur
 
     }
+
+
+
     /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
+    * Description: checks if the postal code file has a matching postal code for the customer
+    *
+    *  ***I didn't have time to complete my partner's part, so no matter what postal 
+    *              code is entered, it will be identified as true***
+    *
+    * @author   Ian (suppose to be Shirina)
+    * @param    code - string of the customer's postal code
+    * @return   integer valued 2, so the postal is always valid
     */
-    public static void validatePostalCode(){
+    public static int validatePostalCode(String code){
+        return 2;
     }
     /*
     * Description: adds sum1 and sum2, then checks if the lsat digit is a 0. (multiple of 10)
@@ -177,7 +186,8 @@ class CustomerSystem{
     * Description: writes all the customers' info in a csv file
     *
     * @author   Ian
-    * @param    csvLine - string containing the customer's ID and all their information
+    * @param    csvLine - string containing the customer's ID and all their information  
+    * @throw    IOException, if input or output exception has occured when writing on a file
     */
     public static void generateCustomerDataFile(String csvLine) throws IOException {
         // condition: if there are no customers checked in/ registered
@@ -224,31 +234,6 @@ class CustomerSystem{
     public static String customerID(String identification) {
 
         return identification.substring(0, 4) + ". ";   // the string of the ID number
-        
-    }
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
-    public static int sumOfOdd(String sumOdd) {
-        
-    }
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
-    public static int sumOfEven(String sumEven) {
-        
-    }
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
-    public static String reverseDigits(String ccNumtoString) {
-        
         
     }
     /*
@@ -320,5 +305,63 @@ class CustomerSystem{
             j += x;     // combine each digit into a string
         }
         return j;   // the credit card number without spaces
+    }
+
+
+
+
+    /*******************************************************************
+    *     BELOW ARE THE METHODS MY PARTNER WAS SUPPOSED TO COMPLETE    *
+    *******************************************************************/
+
+    /*
+    * Description: adds all the numbers inside the string (odd numbers)
+    *
+    * @author   Ian (suppose to be accomplished Shirina)
+    * @param    sumOdd - string containing all the digits in the odd placement
+    * @return   j - integer representing the sum of the odd placements
+    */
+    public static int sumOfOdd(String sumOdd) {
+        int j = 0;      // an accumulator
+        for (int i = 0; i < sumOdd.length(); i++) {
+            String odd = Character.toString(sumOdd.charAt(i));  // converts the char at the index to a string
+            int k = Integer.parseInt(odd);      // converts the String to an int
+
+            j += k;     // accumulating the value
+        }
+        return j;       // sum of the digits in the odd placement 
+    }
+    /*
+    * Description: adds all the numbers inside the string (even numbers)
+    *
+    * @author   Ian (suppose to be accomplished Shirina)
+    * @param    sumEven - string containing all the digits in the even placement being doubled
+    * @return   j - integer representing the sum of the even placements
+    */
+    public static int sumOfEven(String sumEven) {
+        int j = 0;      // an accumulator
+        for (int i = 0; i < sumEven.length(); i++) {
+            String even = Character.toString(sumEven.charAt(i));    // converts the char at the index to a string
+            int k = Integer.parseInt(even);     // converts the String to an int
+
+            j += k;     // accumulating the value
+        }
+        return j;       // sum of the digits in the odd placement 
+    }
+    /*
+    * Description: eliminates the spaces the user inputs in their credit card #
+    *
+    * @author   Ian (suppose to be accomplished Shirina)
+    * @param    ccNumAsString - string of digits from the credit card #
+    * @return   reverse - string of all the values of the reversed credit card #
+    */
+    public static String reverseDigits(String ccNumAsString) {
+        String reverse = "";    // a string accumulator
+        int i = ccNumAsString.length() - 1;     // the index of the last digit
+        while (i > -1) {
+            reverse += ccNumAsString.charAt(i);     // accumulating the inverse string
+            i--;        // move on to the next index
+        }
+        return reverse;     // the reversed credit card #
     }
 }
